@@ -1,8 +1,10 @@
-﻿using SerializationConsoleClient.Models;
+﻿using SerializationConsoleClient.CustomAtrributes;
+using SerializationConsoleClient.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +17,49 @@ namespace SerializationConsoleClient
         {
             // DataContractSerializerTest();
 
-            DataContractSerizalizerExtensionsTest();
+            //  DataContractSerizalizerExtensionsTest();
 
             // DataContractSerizalizerHelperTest();
 
             // StreamTest();
+
+
+            Customer customer = new Customer
+            {
+                Id = 1,
+                FirstName = "John",
+                LastName = "Smith",
+                Salary = 1000,
+                DateOfBirth = DateTime.Parse("1980-01-30"),
+                IsRemoved = true
+            };
+
+            // System.Reflection
+            Type type = customer.GetType();
+
+            var attributes = System.Attribute.GetCustomAttributes(type).OfType<DisplayAttribute>();
+
+            foreach (DisplayAttribute attribute in attributes)
+            {
+                Console.WriteLine(attribute.Text);
+            }
+
+            PropertyInfo[] properties = type.GetProperties();
+
+            foreach (PropertyInfo property in properties)
+            {
+                var propertyAttribute = property.GetCustomAttribute<DisplayAttribute>();
+
+                if (propertyAttribute!=null)
+                    Console.WriteLine($"{propertyAttribute.Text}");
+            }
+
+
+            Console.WriteLine($"Imię: {customer.FirstName}");
+            Console.WriteLine($"Nazwisko: {customer.LastName}");
+
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
 
         private static void StreamTest()
