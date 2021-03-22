@@ -24,6 +24,40 @@ namespace SerializationConsoleClient
             // StreamTest();
 
 
+            // CustomAttributesTest();
+
+
+            Customer customer = new Customer
+            {
+                Id = 1,
+                FirstName = "John",
+                LastName = "Smith",
+                Salary = 1000,
+                DateOfBirth = DateTime.Parse("1980-01-30"),
+                IsRemoved = true
+            };
+
+            try
+            {
+                using (CustomerService customerService = new CustomerService())
+                {
+                    customerService.Process(customer);
+
+                    Console.WriteLine(customer.FirstName);
+                } // ->  customerService.Dispose();
+            }
+            catch(Exception e)
+            {
+
+            }
+
+
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+        }
+
+        private static void CustomAttributesTest()
+        {
             Customer customer = new Customer
             {
                 Id = 1,
@@ -50,16 +84,13 @@ namespace SerializationConsoleClient
             {
                 var propertyAttribute = property.GetCustomAttribute<DisplayAttribute>();
 
-                if (propertyAttribute!=null)
+                if (propertyAttribute != null)
                     Console.WriteLine($"{propertyAttribute.Text}");
             }
 
 
             Console.WriteLine($"Imię: {customer.FirstName}");
             Console.WriteLine($"Nazwisko: {customer.LastName}");
-
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
         }
 
         private static void StreamTest()
@@ -224,4 +255,24 @@ namespace SerializationConsoleClient
             return deserialized;
         }
     }
+
+
+
+    public class CustomerService : IDisposable
+    {
+        public void Process(Customer customer)
+        {
+            File.Create("plik.txt");
+
+            string xml = customer.Serialize();
+
+            File.AppendText(xml);          
+        }
+
+        public void Dispose()
+        {
+            File.Delete("plik.txt");
+        }
+    }
 }
+

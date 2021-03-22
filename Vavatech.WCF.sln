@@ -7,6 +7,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_Serizalization", "01_Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationConsoleClient", "01_Serilization\SerializationConsoleClient\SerializationConsoleClient.csproj", "{E94BFE9D-85D4-4B66-A993-E8062E1E6C3E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02_WCFService", "02_WCFService", "{1E7B301F-4D09-4A8D-88F8-E2A99F2DEF24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IHelloServices", "02_WCFService\IHelloServices\IHelloServices.csproj", "{7C11AF12-59F2-41EF-AB07-DDCD49B4A03F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drafts", "Drafts", "{506A1070-9086-4F07-AE72-B093D47A0BED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeHelloServices", "02_WCFService\FakeHelloService\FakeHelloServices.csproj", "{A7935930-8008-408B-AE60-A6A1F8282172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloServiceHost", "02_WCFService\HelloServiceHost\HelloServiceHost.csproj", "{01DED046-08CD-429C-BC37-3A5E539AB8BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloServiceConsoleClient", "02_WCFService\HelloServiceConsoleClient\HelloServiceConsoleClient.csproj", "{B1F65D1D-1AC0-4874-9A23-04FC58F9A7ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +29,32 @@ Global
 		{E94BFE9D-85D4-4B66-A993-E8062E1E6C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E94BFE9D-85D4-4B66-A993-E8062E1E6C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E94BFE9D-85D4-4B66-A993-E8062E1E6C3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C11AF12-59F2-41EF-AB07-DDCD49B4A03F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C11AF12-59F2-41EF-AB07-DDCD49B4A03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C11AF12-59F2-41EF-AB07-DDCD49B4A03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C11AF12-59F2-41EF-AB07-DDCD49B4A03F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7935930-8008-408B-AE60-A6A1F8282172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7935930-8008-408B-AE60-A6A1F8282172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7935930-8008-408B-AE60-A6A1F8282172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7935930-8008-408B-AE60-A6A1F8282172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01DED046-08CD-429C-BC37-3A5E539AB8BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01DED046-08CD-429C-BC37-3A5E539AB8BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01DED046-08CD-429C-BC37-3A5E539AB8BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01DED046-08CD-429C-BC37-3A5E539AB8BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1F65D1D-1AC0-4874-9A23-04FC58F9A7ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F65D1D-1AC0-4874-9A23-04FC58F9A7ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F65D1D-1AC0-4874-9A23-04FC58F9A7ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F65D1D-1AC0-4874-9A23-04FC58F9A7ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E94BFE9D-85D4-4B66-A993-E8062E1E6C3E} = {AA1C3F44-3C4C-4D84-997F-D7224FBABDA3}
+		{7C11AF12-59F2-41EF-AB07-DDCD49B4A03F} = {1E7B301F-4D09-4A8D-88F8-E2A99F2DEF24}
+		{A7935930-8008-408B-AE60-A6A1F8282172} = {1E7B301F-4D09-4A8D-88F8-E2A99F2DEF24}
+		{01DED046-08CD-429C-BC37-3A5E539AB8BE} = {1E7B301F-4D09-4A8D-88F8-E2A99F2DEF24}
+		{B1F65D1D-1AC0-4874-9A23-04FC58F9A7ED} = {1E7B301F-4D09-4A8D-88F8-E2A99F2DEF24}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF35B583-30D5-4A07-99E6-8357985B31E7}
