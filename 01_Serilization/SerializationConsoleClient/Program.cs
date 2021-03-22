@@ -17,7 +17,7 @@ namespace SerializationConsoleClient
         {
             // DataContractSerializerTest();
 
-            //  DataContractSerizalizerExtensionsTest();
+              DataContractSerizalizerExtensionsTest();
 
             // DataContractSerizalizerHelperTest();
 
@@ -27,6 +27,14 @@ namespace SerializationConsoleClient
             // CustomAttributesTest();
 
 
+            // UsingTest();
+
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+        }
+
+        private static void UsingTest()
+        {
             Customer customer = new Customer
             {
                 Id = 1,
@@ -46,14 +54,10 @@ namespace SerializationConsoleClient
                     Console.WriteLine(customer.FirstName);
                 } // ->  customerService.Dispose();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
-
-
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
         }
 
         private static void CustomAttributesTest()
