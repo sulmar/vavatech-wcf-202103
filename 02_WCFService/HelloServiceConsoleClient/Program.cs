@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -14,17 +15,17 @@ namespace HelloServiceConsoleClient
         static void Main(string[] args)
         {
             // 1. TODO: Add Service Reference
-
+            // WSDL http://localhost:5000/HelloService?wsdl
 
             // 2. Klasa Proxy
 
-            // ProxyClassTest();
+            ProxyClassTest();
 
             ProxyClassCodeTest();
 
             // 3. Channel Factory
 
-            // ChannelFactoryTest();
+            ChannelFactoryTest();
 
             ChannelFactoryCodeTest();
 
@@ -46,6 +47,10 @@ namespace HelloServiceConsoleClient
             int result = helloService.Add(1, 2);
 
             Console.WriteLine(result);
+
+            Customer customer = helloService.Get(1);
+
+            Console.WriteLine($"{customer.FirstName} {customer.LastName}");
         }
 
         // Konfiguracja z kodu
@@ -67,6 +72,10 @@ namespace HelloServiceConsoleClient
             int result = helloService.Add(1, 2);
 
             Console.WriteLine(result);
+
+            Customer customer = helloService.Get(1);
+
+            Console.WriteLine($"{customer.FirstName} {customer.LastName}");
         }
 
         // Konfiguracja z pliku
@@ -81,6 +90,10 @@ namespace HelloServiceConsoleClient
             string response = client.Ping("Hello World!");
 
             Console.WriteLine(response);
+
+            Customer customer = client.Get(1);
+
+            Console.WriteLine($"{customer.FirstName} {customer.LastName}");
         }
 
         // Konfiguracja z kodu
@@ -98,6 +111,10 @@ namespace HelloServiceConsoleClient
             string response = client.Ping("Hello World!");
 
             Console.WriteLine(response);
+
+            Customer customer = client.Get(1);
+
+            Console.WriteLine($"{customer.FirstName} {customer.LastName}");
         }
     }
 
@@ -125,6 +142,11 @@ namespace HelloServiceConsoleClient
         public decimal Calculate(decimal amount, decimal tax)
         {
             throw new NotSupportedException();
+        }
+
+        public Customer Get(int id)
+        {
+            return this.Channel.Get(id);
         }
 
         public string Ping(string message)

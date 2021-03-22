@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -20,6 +21,9 @@ namespace IHelloServices
 
         [OperationContract]
         int Add(int x, int y);
+
+        [OperationContract]
+        Customer Get(int id);
 
         decimal Calculate(decimal amount, decimal tax);
 

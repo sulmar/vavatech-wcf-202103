@@ -59,6 +59,10 @@
       <Project>{7c11af12-59f2-41ef-ab07-ddcd49b4a03f}</Project>
       <Name>IHelloServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{DED9C93F-A996-449E-A10A-54723FA5D6C9}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
