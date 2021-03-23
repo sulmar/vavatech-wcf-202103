@@ -28,16 +28,19 @@ namespace ProductServices
         IEnumerable<Product> GetByCriteria(decimal from, decimal to, string color);
 
         // POST api/products
-        //[OperationContract]
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "api/products")]
         void Add(Product product);
 
         // PUT api/products/{id}
         // PATCH api/products/{id}
-        //[OperationContract]
-        void Update(int id, Product product);
+        [OperationContract]
+        [WebInvoke(Method = "PUT", UriTemplate = "api/products/{id}")]
+        void Update(string id, Product product);
 
         // DELETE api/products/{id}
-        //[OperationContract]
-        void Remove(int id);
+        [OperationContract]
+        [WebInvoke(Method = "DELETE", UriTemplate = "api/products/{id}")]
+        void Remove(string id);
     }
 }
