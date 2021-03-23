@@ -19,7 +19,7 @@ namespace IISHosting.Models
 
 
     // add reference System.Runtime.Serialization
-    [DataContract(Namespace = "http://vavatech.pl/2021/03/22/Customer")]
+    [DataContract(Namespace = "http://vavatech.pl/2021/03/22/Customer", IsReference = true)]
     public class Customer
     {
         [DataMember]
@@ -33,8 +33,9 @@ namespace IISHosting.Models
         [DataMember(Order = 1, Name = "dob")] 
         public DateTime DateOfBirth { get; set; }
 
-        // Self-reference
-        // public Customer Partner { get; set; }
+        //Self-reference
+        [DataMember] 
+        public Customer Partner { get; set; }
 
         // Inheritence
 

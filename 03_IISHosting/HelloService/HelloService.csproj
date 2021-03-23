@@ -68,6 +68,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fakers\CustomerFaker.cs" />
     <Compile Include="HelloService.svc.cs">
       <DependentUpon>HelloService.svc</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
 ﻿using IISHosting.Models;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace HelloService
 
         [OperationContract]
         Customer GetCustomer(int id);
+
+        [OperationContract]
+        Employee GetEmployee(int id);
     }
 
 

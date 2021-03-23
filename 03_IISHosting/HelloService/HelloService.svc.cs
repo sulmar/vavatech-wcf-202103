@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using IISHosting.Models;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +11,22 @@ using System.Text;
 
 namespace HelloService
 {
+
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class FakeHelloService : IHelloService
     {
         public Customer GetCustomer(int id)
         {
-            Customer customer = new Faker<Customer>()
-               .RuleFor(p => p.Id, f => id)
-               .RuleFor(p => p.FirstName, f => f.Person.FirstName)
-               .RuleFor(p => p.LastName, f => f.Person.LastName)
-               .RuleFor(p => p.Salary, f => Math.Round(f.Random.Decimal(1m, 1000m), 2))
-               .RuleFor(p => p.DateOfBirth, f => f.Person.DateOfBirth)
-               .RuleFor(p => p.IsRemoved, f => f.Random.Bool())
+            Customer customer = new CustomerFaker()
                .Generate();
+
+            Customer partner = new CustomerFaker()
+               .Generate();
+
+            partner.Partner = customer;
+
+            customer.Partner = partner;
 
             return customer;
         }
@@ -44,6 +47,19 @@ namespace HelloService
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        public Employee GetEmployee(int id)
+        {
+            FullTimeEmployee customer = new Faker<FullTimeEmployee>()
+                .RuleFor(p => p.Id, f => f.IndexFaker)
+                .RuleFor(p => p.AnnualSalary, f => f.Random.Decimal(1, 1000))
+                .RuleFor(p => p.Departament, f => f.Commerce.Department())
+                .RuleFor(p => p.FirstName, f => f.Person.FirstName)
+                .RuleFor(p => p.LastName, f => f.Person.LastName)
+                .Generate();
+
+            return customer;
         }
     }
 }
