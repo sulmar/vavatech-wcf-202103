@@ -1,7 +1,9 @@
-﻿using SerializationConsoleClient.CustomAtrributes;
+﻿using Bogus;
+using SerializationConsoleClient.CustomAtrributes;
 using SerializationConsoleClient.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,6 +13,13 @@ using System.Threading.Tasks;
 
 namespace SerializationConsoleClient
 {
+
+    //class CustomerInfo
+    //{
+    //    public string FirstName { get; set; }
+    //    public string LastName { get; set; }
+    //}
+
     class Program
     {
         static void Main(string[] args)
@@ -28,6 +37,55 @@ namespace SerializationConsoleClient
 
 
             // UsingTest();
+
+            var customer = new Customer
+            {
+                Id = 1,
+                FirstName = "John",
+                LastName = "Smith",
+                Salary = 1000,
+                DateOfBirth = DateTime.Parse("1980-01-30"),
+                IsRemoved = true
+            };
+
+            var customerInfo = new { FirstName = customer.FirstName, LastName = customer.LastName, Wynagrodzenie = customer.Salary  };
+
+            // class anonymouse_5394085n9hd24234237d23747234723
+            // { public string FirstName { get; }
+            //   public string LastName { get; }
+            //   public decimal Wynagrodzenie { get; }
+            // }
+
+            // język deklaratywny
+            // TSQL: SELECT FirstName, LastName, Salary AS Wynagrodzenie FROM Customers WHERE IsRemoved = 0
+
+            // język C# imperatywny, Linq - deklarytywny
+
+
+
+            IEnumerable<Customer> customers = new Faker<Customer>()
+                .RuleFor(p => p.FirstName, f => f.Person.FirstName)
+                .RuleFor(p => p.LastName, f => f.Person.LastName)
+                .RuleFor(p => p.IsRemoved, f => f.Random.Bool())
+                .Generate(100);     
+                            
+
+           var query = customers
+                .Where(c=> !c.IsRemoved)
+                .OrderBy(c => c.FirstName)
+                .Select(c => new { Imie = c.FirstName, Nazwisko = c.LastName });
+
+            //List<Customer> results = new List<Customer>();
+            //foreach (var c  in customers)
+            //{
+            //    if (!c.IsRemoved)
+            //    {
+            //        results.Add(c);
+            //    }
+            //}
+
+            // var groupByIsRemoved = 
+
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
