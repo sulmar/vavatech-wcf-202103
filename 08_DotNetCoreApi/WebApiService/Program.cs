@@ -24,7 +24,7 @@ namespace WebApiService
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("https://*:5010");
+                    webBuilder.UseUrls("https://*:5010");   // https://docs.microsoft.com/pl-pl/aspnet/core/fundamentals/host/web-host?view=aspnetcore-5.0#server-urls
                 })
                 .UseWindowsService()   // <- Windows Service
             ;
