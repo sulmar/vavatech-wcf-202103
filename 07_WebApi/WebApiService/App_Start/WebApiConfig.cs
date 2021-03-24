@@ -18,6 +18,7 @@ namespace WebApiService
         {
             // Web API configuration and services
 
+            //  Install-Package Autofac.WebApi2
             ContainerBuilder builder = new ContainerBuilder();
 
             // Register your Web API controllers.
@@ -28,7 +29,7 @@ namespace WebApiService
             
             IContainer container = builder.Build();
 
-            // Install-Package Autofac.WebApi2
+           
             // https://autofaccn.readthedocs.io/en/latest/integration/webapi.html
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
