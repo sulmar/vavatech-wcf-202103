@@ -25,6 +25,8 @@ namespace HelloService
         Customer GetCustomer(int id);
 
         [OperationContract]
+        [FaultContract(typeof(EmployeeNotFoundFault))]
+        [FaultContract(typeof(SqlFault))]
         Employee GetEmployee(int id);
     }
 
@@ -50,4 +52,35 @@ namespace HelloService
             set { stringValue = value; }
         }
     }
+
+    [DataContract]
+    public class EmployeeNotFoundFault
+    {
+        [DataMember]
+        public int Code { get; set; }
+        [DataMember] 
+        public string Description { get; set; }
+    }
+
+    [DataContract]
+    public class SqlFault
+    {
+        public SqlFault()
+        {
+
+        }
+
+        public SqlFault(int code, string description)
+        {
+            Code = code;
+            Description = description;
+        }
+
+        [DataMember]
+        public int Code { get; set; }
+        [DataMember]
+        public string Description { get; set; }
+
+    }
+
 }

@@ -3,6 +3,8 @@ using IISHosting.Models;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -14,6 +16,8 @@ namespace HelloService
 
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+    
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class FakeHelloService : IHelloService
     {
         public Customer GetCustomer(int id)
@@ -51,6 +55,17 @@ namespace HelloService
 
         public Employee GetEmployee(int id)
         {
+            if (id == 0)
+            {
+                EmployeeNotFoundFault fault = new EmployeeNotFoundFault
+                {
+                    Code = 404,
+                    Description = $"Employee id {id} not found"
+                };
+
+                throw new FaultException<EmployeeNotFoundFault>(fault, "NotFound");
+            }
+
             FullTimeEmployee customer = new Faker<FullTimeEmployee>()
                 .RuleFor(p => p.Id, f => f.IndexFaker)
                 .RuleFor(p => p.AnnualSalary, f => f.Random.Decimal(1, 1000))
@@ -58,6 +73,15 @@ namespace HelloService
                 .RuleFor(p => p.FirstName, f => f.Person.FirstName)
                 .RuleFor(p => p.LastName, f => f.Person.LastName)
                 .Generate();
+
+            try
+            {
+                // throw new SqlException("primary key duplicate", null, new Exception(), Guid.NewGuid() );
+            }
+            catch(SqlException ex)
+            {
+                throw new FaultException<SqlFault>(new SqlFault(ex.Number, ex.Message));                
+            }
 
             return customer;
         }
