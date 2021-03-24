@@ -1,12 +1,7 @@
-﻿using DbServices;
-using FakeServices;
-using IServices;
+﻿using IServices;
 using Models;
 using Models.SearchCriterias;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 
 namespace WebApiService.Controllers
@@ -17,18 +12,6 @@ namespace WebApiService.Controllers
     public class ProductsController : ApiController
     {
         private readonly IProductService productService;
-
-        public ProductsController()
-            : this(new FakeProductService(new ProductFaker()))
-        {
-
-        }
-
-        //public ProductsController()
-        //  : this(new DbProductService(new System.Data.SqlClient.SqlConnection("MyConnectionString")))
-        //{
-
-        //}
 
         public ProductsController(IProductService productService)
         {
@@ -56,12 +39,15 @@ namespace WebApiService.Controllers
 
         [HttpGet]
         //[Route("api/products/{id}")]
-        [Route("{id:int}", Order = 2)]
-        public Product Get(int id)
+        [Route("{id:int}", Order = 2, Name = "GetProductById")]
+        public IHttpActionResult Get(int id)
         {
             var product = productService.Get(id);
 
-            return product;
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
         }
 
         // GET api/products?from={from}&to={to}&color={color}
@@ -87,18 +73,25 @@ namespace WebApiService.Controllers
         // GET api/products/{barcode}
 
         [HttpGet]
-        [Route("{barcode:length(10)}", Order = 1)]
-        public Product Get(string barcode)
+        [Route("{barcode:length(13)}", Order = 1)]
+        public IHttpActionResult Get(string barcode)
         {
             Product product = productService.Get(barcode);
 
-            return product;
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
         }
 
         [HttpPost]
-        public void Post(Product product)
+        public IHttpActionResult Post(Product product)
         {
             productService.Add(product);
+
+            // return Created($"http://localhost:5000/api/products/{product.Id}", product);
+
+            return CreatedAtRoute("GetProductById", new { Id = product.Id }, product);
         }
 
         [HttpPut]
@@ -108,8 +101,6 @@ namespace WebApiService.Controllers
             productService.Update(product);
         }
 
-
-        
 
         [HttpDelete]
         [Route("{id}")]

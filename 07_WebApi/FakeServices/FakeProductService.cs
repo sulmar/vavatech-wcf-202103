@@ -21,8 +21,17 @@ namespace FakeServices
             products = faker.Generate(100);
         }
 
+        public void Calculate(Product product)
+        {
+
+        }
+
         public void Add(Product product)
         {
+            int id = products.Max(p => p.Id);
+
+            product.Id = ++id;
+
             products.Add(product);
         }
 
